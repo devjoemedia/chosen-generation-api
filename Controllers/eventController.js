@@ -1,8 +1,28 @@
 const EventItem = require("../models/Event");
+const multer = require("multer");
+const path = require('path')
+
+let storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname,'../../client/public/uploads'));
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname  + "-" + uniqueSuffix + '.jpg');
+  },
+});
+
+exports.upload = multer({ storage: storage });
 
 exports.addEvent = async (req, res) => {
   try {
-    const item = await EventItem.create(req.body);
+    const theme = req.body.theme;
+    const host = req.body.host;
+    const description = req.body.description;
+    const startDate = req.body.startDate;
+    const photo = req.file.filename;
+
+    const item = await EventItem.create({theme,host,description,startDate,photo});
     if (item) {
       res.status(201).json({
         status: "success",
@@ -10,7 +30,7 @@ exports.addEvent = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err.message)
+    console.log(err.message);
     res.status(500).json({
       status: "error",
       message: "sorry your request was not completed",

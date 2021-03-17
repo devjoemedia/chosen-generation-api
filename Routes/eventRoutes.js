@@ -2,7 +2,7 @@ const express = require("express");
 const eventController = require("../Controllers/eventController");
 const router = express.Router();
 
-router.route("/").get(eventController.getEvents).post(eventController.addEvent);
+router.route("/").get(eventController.getEvents).post(eventController.upload.single('photo'), eventController.addEvent);
 
 router
   .route("/:id")
