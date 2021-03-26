@@ -4,7 +4,7 @@ const path = require('path')
 
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'/uploads'));
+    cb(null, path.join(__dirname,'../uploads'));
     // cb(null, path.join(__dirname,'../../client/public/uploads'));
   },
   filename: function (req, file, cb) {
@@ -17,7 +17,7 @@ exports.upload = multer({ storage: storage });
 
 exports.addEvent = async (req, res) => {
   try {
-    const theme = req.body.theme;
+    const theme = req.body.theme; 
     const host = req.body.host;
     const description = req.body.description;
     const startDate = req.body.startDate;
