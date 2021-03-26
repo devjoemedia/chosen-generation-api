@@ -6,7 +6,7 @@ const prayerRoutes = require("./Routes/prayerRequestRoutes");
 const messageRoutes = require("./Routes/messageRoutes");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+const path = require("path");
 
 dotenv.config({ path: "./config.env" });
 
@@ -24,6 +24,9 @@ const app = express();
 
 // Enable CORS
 app.use(cors());
+
+// Static folder
+// app.use(express.static(path.join(__dirname, '../client/build')))
 
 // Body Parser
 app.use(express.json());
