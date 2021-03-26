@@ -5,6 +5,7 @@ const eventRoutes = require("./Routes/eventRoutes");
 const prayerRoutes = require("./Routes/prayerRequestRoutes");
 const messageRoutes = require("./Routes/messageRoutes");
 const mongoose = require("mongoose");
+const cors = require('cors')
 const bodyParser = require("body-parser");
 const path = require("path");
 
