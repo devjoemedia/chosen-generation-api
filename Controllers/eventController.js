@@ -82,7 +82,13 @@ exports.updateEvent = async (req, res) => {
     const startDate = req.body.startDate;
     const photo = req.file.filename;
 
-    const item = await EventItem.findByIdAndUpdate(req.params.id,{theme,host,description,startDate,photo});
+    if(photo) {
+      const item = await EventItem.findByIdAndUpdate(req.params.id,{theme,host,description,startDate,photo});
+      
+    }else {
+      const item = await EventItem.findByIdAndUpdate(req.params.id,{theme,host,description,startDate});
+
+    }
     // const item = await EventItem.findByIdAndUpdate(req.params.id, req.body);
     if (item) {
       res.status(200).json({
