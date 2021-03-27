@@ -82,7 +82,7 @@ exports.updateEvent = async (req, res) => {
     const startDate = req.body.startDate;
     const photo = req.file.filename;
 
-    if(photo) {
+    if(photo === null || photo === undefined) {
       const item = await EventItem.findByIdAndUpdate(req.params.id,{theme,host,description,startDate,photo});
       
     }else {
