@@ -26,8 +26,7 @@ const app = express();
 // Enable CORS
 app.use(cors());
 
-// Static folder
-// app.use(express.static(path.join(__dirname, '../client/build')))
+
 
 // Body Parser
 app.use(express.json());
@@ -35,6 +34,11 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 5000;
 
+// Static folder
+app.use(express.static('build'))
+app.get('*', (req, res)=> {
+  res.sendFile(path.resolve(__dirname,'build', 'index.html' ))
+})
 app.use("/api/v1/sermons", sermonRoutes);
 app.use("/api/v1/events", eventRoutes);
 app.use("/api/v1/prayer-requests", prayerRoutes);

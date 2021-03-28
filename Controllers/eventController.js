@@ -4,7 +4,7 @@ const path = require('path')
 
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'../uploads'));
+    cb(null, path.join(__dirname,'../build/uploads'));
     // cb(null, path.join(__dirname,'../../client/public/uploads'));
   },
   filename: function (req, file, cb) {
@@ -82,7 +82,7 @@ exports.updateEvent = async (req, res) => {
     const startDate = req.body.startDate;
   
     const item = await EventItem.findByIdAndUpdate(req.params.id,req.body);
-    // const item = await EventItem.findByIdAndUpdate(req.params.id, req.body);
+
     if (item) {
       res.status(200).json({
         status: "success",
