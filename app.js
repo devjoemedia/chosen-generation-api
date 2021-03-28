@@ -34,14 +34,15 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 5000;
 
+app.use("/api/v1/sermons", sermonRoutes);
+app.use("/api/v1/events", eventRoutes);
+app.use("/api/v1/prayer-requests", prayerRoutes);
+app.use("/api/v1/messages", messageRoutes);
+
 // Static folder
 app.use(express.static('build'))
 app.get('*', (req, res)=> {
   res.sendFile(path.resolve(__dirname,'build', 'index.html' ))
 })
-app.use("/api/v1/sermons", sermonRoutes);
-app.use("/api/v1/events", eventRoutes);
-app.use("/api/v1/prayer-requests", prayerRoutes);
-app.use("/api/v1/messages", messageRoutes);
 
 app.listen(port, () => console.log(`server started on Port: ${port}`));
